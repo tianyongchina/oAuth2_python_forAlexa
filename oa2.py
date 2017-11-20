@@ -16,6 +16,11 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 sys.path.append('../')
 
+url = [
+    (r'/oa2/auth', Oa2AuthHandle),
+    (r'/oa2/token', Oa2TokenHandle),
+    (r'/oa2/login', Oa2LoginHandle),
+]
 
 class Oa2AuthHandle(tornado.web.RequestHandler):
     def get(self):

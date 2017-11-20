@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width">
+<!--
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+-->
+    <script type="text/javascript" src="{{ static_url('js/viewport-1.0.3.js')}}" data-width="360"></script>
+
+    <title>XXXX Login</title>
+    <link href="{{ static_url('css/login.css')}}" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="{{ static_url('js/jquery.min.js')}}"></script>
+
+</head>
+
+<body">
+
+    <div id="login">
+	    <h1>VOID X</h1>
+        <input id="user_text" type="text" placeholder="Account"/>
+        <input id="password_text" type="text" placeholder="Password"/>
+        <input type="button" id="login_button" value="Connect" onclick="Login()"/>
+        <p><a href="javascript:void(0);">Forgot your password?</a></p>
+	</div>
+
+    <script type="text/javascript">
+    function Login()
+    {   
+        var user = document.getElementById("user_text");
+        var pwd = document.getElementById("password_text");
+        if (user.value.length > 0)
+        {
+            //console.log("user: " + user.value);
+            //console.log("pwd: " + pwd.value);
+            var params = "user=" + user.value + "&pwd=" + pwd.value + "&state={{escape(state)}}" + "&client_id={{escape(client_id)}}" +
+                "&response_type={{escape(response_type)}}" + "&scope={{escape(scope)}}" + "&redirect_uri={{escape(redirect_uri)}}";
+            $.get("/oa2/login", params, function(reUrl){
+                //alert(reUrl);                
+                window.location = reUrl;
+            });
+        }
+        else
+        {
+            alert("please input user and password");
+        }
+    }
+	</script>
+
+</body>
+</html>
